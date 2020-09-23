@@ -1,4 +1,4 @@
-package com.geekbrains.kotlin_note.ui.note
+package com.geekbrains.kotlin_r61note_app.ui.note
 
 import android.content.Context
 import android.content.Intent
@@ -8,9 +8,9 @@ import android.text.TextWatcher
 import android.view.MenuItem
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
-import com.geekbrains.kotlin_note.R
-import com.geekbrains.kotlin_note.data.entity.Note
-import com.geekbrains.kotlin_note.ui.base.BaseActivity
+import com.geekbrains.kotlin_r61note_app.R
+import com.geekbrains.kotlin_r61note_app.data.entity.Note
+import com.geekbrains.kotlin_r61note_app.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.activity_note.*
 import java.text.SimpleDateFormat

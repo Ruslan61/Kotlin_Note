@@ -1,4 +1,4 @@
-package com.geekbrains.kotlin_note.ui.common
+package com.geekbrains.kotlin_r61note_app.ui.common
 
 import android.annotation.SuppressLint
 import android.content.Context

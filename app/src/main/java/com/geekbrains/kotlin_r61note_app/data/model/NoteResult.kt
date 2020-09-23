@@ -1,4 +1,4 @@
-package com.geekbrains.kotlin_note.data.model
+package com.geekbrains.kotlin_r61note_app.data.model
 
 sealed class NoteResult {
     data class Success<out T>(val data: T): NoteResult()

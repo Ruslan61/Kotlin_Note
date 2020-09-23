@@ -1,4 +1,4 @@
-package com.geekbrains.kotlin_note.ui.main
+package com.geekbrains.kotlin_r61note_app.ui.main
 
 import android.app.Application
 

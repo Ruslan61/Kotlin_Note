@@ -1,4 +1,4 @@
-package com.geekbrains.kotlin_note.ui.base
+package com.geekbrains.kotlin_r61note_app.ui.base
 
 import android.os.Bundle
 import android.widget.Toast

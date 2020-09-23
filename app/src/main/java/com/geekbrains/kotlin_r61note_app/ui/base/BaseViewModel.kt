@@ -1,4 +1,4 @@
-package com.geekbrains.kotlin_note.ui.base
+package com.geekbrains.kotlin_r61note_app.ui.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

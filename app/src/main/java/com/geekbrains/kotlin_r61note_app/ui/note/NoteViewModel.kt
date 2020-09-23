@@ -1,9 +1,9 @@
-package com.geekbrains.kotlin_note.ui.note
+package com.geekbrains.kotlin_r61note_app.ui.note
 
-import com.geekbrains.kotlin_note.data.NotesRepository
-import com.geekbrains.kotlin_note.data.entity.Note
-import com.geekbrains.kotlin_note.data.model.NoteResult
-import com.geekbrains.kotlin_note.ui.base.BaseViewModel
+import com.geekbrains.kotlin_r61note_app.data.NotesRepository
+import com.geekbrains.kotlin_r61note_app.data.entity.Note
+import com.geekbrains.kotlin_r61note_app.data.model.NoteResult
+import com.geekbrains.kotlin_r61note_app.ui.base.BaseViewModel
 
 class NoteViewModel : BaseViewModel<Note?, NoteViewState>() {
 

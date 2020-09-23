@@ -1,4 +1,4 @@
-package com.geekbrains.kotlin_note.data.entity
+package com.geekbrains.kotlin_r61note_app.data.entity
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

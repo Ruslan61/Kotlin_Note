@@ -1,4 +1,4 @@
-package com.geekbrains.kotlin_note
+package com.geekbrains.kotlin_r61note_app
 
 import org.junit.Test
 

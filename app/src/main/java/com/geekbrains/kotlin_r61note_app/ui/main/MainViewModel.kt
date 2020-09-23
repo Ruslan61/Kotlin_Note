@@ -1,10 +1,10 @@
-package com.geekbrains.kotlin_note.ui.main
+package com.geekbrains.kotlin_r61note_app.ui.main
 
 import androidx.lifecycle.Observer
-import com.geekbrains.kotlin_note.data.NotesRepository
-import com.geekbrains.kotlin_note.data.entity.Note
-import com.geekbrains.kotlin_note.data.model.NoteResult
-import com.geekbrains.kotlin_note.ui.base.BaseViewModel
+import com.geekbrains.kotlin_r61note_app.data.NotesRepository
+import com.geekbrains.kotlin_r61note_app.data.entity.Note
+import com.geekbrains.kotlin_r61note_app.data.model.NoteResult
+import com.geekbrains.kotlin_r61note_app.ui.base.BaseViewModel
 
 class MainViewModel() : BaseViewModel<List<Note>?, MainViewState>() {
 

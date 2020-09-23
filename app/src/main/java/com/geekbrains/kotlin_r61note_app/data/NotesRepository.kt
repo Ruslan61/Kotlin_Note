@@ -1,8 +1,8 @@
-package com.geekbrains.kotlin_note.data
+package com.geekbrains.kotlin_r61note_app.data
 
-import com.geekbrains.kotlin_note.data.entity.Note
-import com.geekbrains.kotlin_note.data.provider.DataProvider
-import com.geekbrains.kotlin_note.data.provider.FirestoreProvider
+import com.geekbrains.kotlin_r61note_app.data.entity.Note
+import com.geekbrains.kotlin_r61note_app.data.provider.DataProvider
+import com.geekbrains.kotlin_r61note_app.data.provider.FirestoreProvider
 
 object NotesRepository {
 

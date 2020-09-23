@@ -1,14 +1,12 @@
-package com.geekbrains.kotlin_note.ui.main
+package com.geekbrains.kotlin_r61note_app.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.geekbrains.kotlin_note.R
-import com.geekbrains.kotlin_note.data.entity.Note
-import com.geekbrains.kotlin_note.ui.base.BaseActivity
-import com.geekbrains.kotlin_note.ui.note.NoteActivity
+import com.geekbrains.kotlin_r61note_app.R
+import com.geekbrains.kotlin_r61note_app.data.entity.Note
+import com.geekbrains.kotlin_r61note_app.ui.base.BaseActivity
+import com.geekbrains.kotlin_r61note_app.ui.note.NoteActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<List<Note>?, MainViewState>() {

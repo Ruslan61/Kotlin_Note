@@ -1,9 +1,9 @@
-package com.geekbrains.kotlin_note.data.provider
+package com.geekbrains.kotlin_r61note_app.data.provider
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.geekbrains.kotlin_note.data.entity.Note
-import com.geekbrains.kotlin_note.data.model.NoteResult
+import com.geekbrains.kotlin_r61note_app.data.entity.Note
+import com.geekbrains.kotlin_r61note_app.data.model.NoteResult
 import com.google.firebase.firestore.FirebaseFirestore
 
 class FirestoreProvider : DataProvider {

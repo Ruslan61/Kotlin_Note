@@ -1,4 +1,4 @@
-package com.geekbrains.kotlin_note.ui.main
+package com.geekbrains.kotlin_r61note_app.ui.main
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.geekbrains.kotlin_note.R
-import com.geekbrains.kotlin_note.data.entity.Note
+import com.geekbrains.kotlin_r61note_app.R
+import com.geekbrains.kotlin_r61note_app.data.entity.Note
 import kotlinx.android.synthetic.main.item_note.view.*
 
 class NotesRVAdapter(val onItemClick: ((Note) -> Unit)? = null) :
