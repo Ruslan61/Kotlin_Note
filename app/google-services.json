@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "47257879769",
+    "firebase_url": "https://kotlin-note-f4828.firebaseio.com",
+    "project_id": "kotlin-note-f4828",
+    "storage_bucket": "kotlin-note-f4828.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47257879769:android:634f59ee63cdfc88976ac8",
+        "android_client_info": {
+          "package_name": "com.geekbrains.kotlin_note"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47257879769-mle66ieu2su4ldei1iet3gthnidkc502.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXnoSp0toBv56dDjEh8fkFbqa4hVdZhPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47257879769-mle66ieu2su4ldei1iet3gthnidkc502.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
