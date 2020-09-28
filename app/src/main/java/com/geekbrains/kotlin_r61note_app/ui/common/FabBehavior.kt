@@ -1,6 +1,5 @@
 package com.geekbrains.kotlin_r61note_app.ui.common
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
@@ -20,7 +19,12 @@ class FabBehavior(context: Context, attributeSet: AttributeSet) :
         type: Int
     ): Boolean {
         return axes == ViewCompat.SCROLL_AXIS_VERTICAL || super.onStartNestedScroll(
-            coordinatorLayout, child, directTargetChild, target, axes, type
+            coordinatorLayout,
+            child,
+            directTargetChild,
+            target,
+            axes,
+            type
         )
     }
 
@@ -35,23 +39,19 @@ class FabBehavior(context: Context, attributeSet: AttributeSet) :
         type: Int,
         consumed: IntArray
     ) {
+        child.x += dyConsumed
 
-//        child.x += dyConsumed
-        if (dyConsumed > 0 && child.visibility == View.VISIBLE) {
-            child.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
-                @SuppressLint("RestrictedApi")
-                override fun onHidden(fab: FloatingActionButton) {
-                    fab.visibility = View.INVISIBLE
-                }
-            })
-        } else if (dyConsumed < 0 && child.visibility != View.VISIBLE) {
-            child.show()
-        }
         super.onNestedScroll(
-            coordinatorLayout, child, target,
-            dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type, consumed
+            coordinatorLayout,
+            child,
+            target,
+            dxConsumed,
+            dyConsumed,
+            dxUnconsumed,
+            dyUnconsumed,
+            type,
+            consumed
         )
     }
-
 
 }
