@@ -1,13 +1,17 @@
 package com.geekbrains.kotlin_r61note_app.data.provider
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.geekbrains.kotlin_r61note_app.data.entity.Note
 import com.geekbrains.kotlin_r61note_app.data.entity.User
 import com.geekbrains.kotlin_r61note_app.data.errors.NoAuthException
 import com.geekbrains.kotlin_r61note_app.data.model.NoteResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 
 class FirestoreProvider(val firebaseAuth: FirebaseAuth, val store: FirebaseFirestore) :
@@ -27,67 +31,70 @@ class FirestoreProvider(val firebaseAuth: FirebaseAuth, val store: FirebaseFires
         } ?: throw NoAuthException()
 
 
-    override fun getCurrentUser(): LiveData<User?> = MutableLiveData<User?>().apply {
-        value = currentUser?.let {
-            User(it.displayName ?: "", it.email ?: "")
-        }
+    override suspend fun getCurrentUser(): User? = suspendCoroutine { continuation ->
+        continuation.resume(currentUser?.let { User(it.displayName ?: "", it.email ?: "") })
     }
 
-    override fun subscribeToAllNotes(): LiveData<NoteResult> = MutableLiveData<NoteResult>().apply {
-        try {
-            notesReference.addSnapshotListener { snapshot, e ->
-                e?.let {
+    override fun subscribeToAllNotes(): ReceiveChannel<NoteResult> =
+        Channel<NoteResult>(Channel.CONFLATED).apply {
+            var registration: ListenerRegistration? = null
 
-                } ?: snapshot?.let {
-                    val notes = snapshot.documents.mapNotNull { it.toObject(Note::class.java) }
-                    value = NoteResult.Success(notes)
+            try {
+                registration = notesReference.addSnapshotListener { snapshot, e ->
+                    val value = e?.let {
+                        NoteResult.Error(it)
+                    } ?: snapshot?.let {
+                        val notes = snapshot.documents.mapNotNull { it.toObject(Note::class.java) }
+                        NoteResult.Success(notes)
+                    }
+
+                    value?.let { offer(it) }
                 }
+            } catch (t: Throwable) {
+                offer(NoteResult.Error(t))
             }
-        } catch (t: Throwable) {
-            value = NoteResult.Error(t)
-        }
-    }
 
-    override fun saveNote(note: Note): LiveData<NoteResult> = MutableLiveData<NoteResult>().apply {
+            invokeOnClose { registration?.remove() }
+        }
+
+    override suspend fun saveNote(note: Note): Note = suspendCoroutine { continuation ->
         try {
             notesReference.document(note.id).set(note)
-                .addOnSuccessListener { snapshot ->
-                    value = NoteResult.Success(note)
+                .addOnSuccessListener {
+                    continuation.resume(note)
                 }.addOnFailureListener {
-                    value = NoteResult.Error(it)
+                    continuation.resumeWithException(it)
                 }
         } catch (t: Throwable) {
-            value = NoteResult.Error(t)
+            continuation.resumeWithException(t)
         }
     }
 
-    override fun getNoteById(id: String): LiveData<NoteResult> =
-        MutableLiveData<NoteResult>().apply {
-            try {
-                notesReference.document(id).get()
-                    .addOnSuccessListener { snapshot ->
-                        val note = snapshot.toObject(Note::class.java)
-                        value = NoteResult.Success(note)
-                    }.addOnFailureListener {
-                        value = NoteResult.Error(it)
-                    }
-            } catch (t: Throwable) {
-                value = NoteResult.Error(t)
-            }
+    override suspend fun getNoteById(id: String): Note? = suspendCoroutine { continuation ->
+        try {
+            notesReference.document(id).get()
+                .addOnSuccessListener { snapshot ->
+                    val note = snapshot.toObject(Note::class.java)
+                    continuation.resume(note)
+                }.addOnFailureListener {
+                    continuation.resumeWithException(it)
+                }
+        } catch (t: Throwable) {
+            continuation.resumeWithException(t)
         }
+    }
 
-    override fun deleteNote(id: String): LiveData<NoteResult> =
-        MutableLiveData<NoteResult>().apply {
-            try {
-                notesReference.document(id).delete()
-                    .addOnSuccessListener { snapshot ->
-                        value = NoteResult.Success(null)
-                    }.addOnFailureListener {
-                        value = NoteResult.Error(it)
-                    }
-            } catch (t: Throwable) {
-                value = NoteResult.Error(t)
-            }
+    override suspend fun deleteNote(id: String): Unit = suspendCoroutine { continuation ->
+        try {
+            notesReference.document(id).delete()
+                .addOnSuccessListener { snapshot ->
+                    continuation.resume(Unit)
+                }.addOnFailureListener {
+                    continuation.resumeWithException(it)
+                }
+        } catch (t: Throwable) {
+            continuation.resumeWithException(t)
         }
+    }
 
 }
